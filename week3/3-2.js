@@ -11,3 +11,5 @@ if (discountPrice <=0){
     discountPrice *= 0.9
     console.log(discountPrice)
 }
+
+// testing
