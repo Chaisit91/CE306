@@ -7,6 +7,7 @@ interface CounterProps{
 
 const Counter: React.FC<CounterProps> =({initialCount = 0}) => {
     const [count,setCount] = useState<number>(initialCount);
+    const [name, setName] = useState<string>('');
 
     const increment =() => {
         setCount(prevCount => prevCount + 1);
@@ -19,6 +20,9 @@ const Counter: React.FC<CounterProps> =({initialCount = 0}) => {
             <h1>Count: {count}</h1>
             <button onClick = {increment}>increment</button>
             <button onClick = {decrement}>decrement</button>
+            <h2>Your Name : {name}</h2>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            
         </div>
     )
 }
