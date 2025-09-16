@@ -1,141 +1,112 @@
+import React, { useState } from 'react';
 
-import React, { useEffect, useState } from "react";
+interface FormData {
+  name: string;
+  email: string;
+}
 
-const FormData: React.FC = () => {
-    const [count, setCount] = useState<number>(0);
-    const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>(''); 
+const UserForm: React.FC = () => {
 
-    const clear =() =>{
-      setName('')
-      setEmail('')
-    }
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [submittedData, setSubmittedData] = useState<FormData>();
 
-    const submit
-    
-    useEffect(() => {
-        console.log(`Empty Dependency Effect: Component re-rendered`);
-        console.log(`Current Count: ${count}, Name: ${name}`);
-        console.log(`Current Count: ${count}, Email: ${email}`);
-    });
+  const handleSubmit = () => {
+    alert(`ชื่อ: ${name || 'ยังไม่ได้กรอก'}\nอีเมล: ${email || 'ยังไม่ได้กรอก'}`);
+    setSubmittedData({name,email}); 
+  };
 
-    return (
-        <div>
-            <h2>No Dependency Array</h2>
-            <p>Name: {name}</p>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter name"
-            />
-            <p>Email: {email}</p>
-            <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter email"
-            />
-            <div style={{margin: '20px 0' ,display: "flex" , gap :'15px' , justifyContent :"center"}}>
-                <button onClick = {submitform} style={{backgroundColor : '#259e1aff'}}>Submit</button>
-                <button onClick = {clear}style={{backgroundColor: 'hsla(0, 99%, 47%, 1.00)'}}>Reset</button>
-            </div>
+  const handleClear = () => {
+    setName('');
+    setEmail('')
 
+    setSubmittedData(undefined); 
+  };
 
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+      backgroundColor: '#ffffffff',
+    }}>
+      <div style={{
+        padding: '30px',
+        maxWidth: '400px',
+        width: '100%',
+        backgroundColor: '#fff',
+        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+        borderRadius: '10px',
+        fontFamily: 'sans-serif'
+      }}>
+        <h2 style={{ textAlign: 'center' }}>User Form Exercise - Solution</h2>
+
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>ชื่อ: {name}</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="กรอกชื่อของคุณ"
+            value={name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
+          />
         </div>
-    );
+
+        
+        <div style={{ marginBottom: '15px' }}>
+          <label>อีเมล: {email}</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="กรอกอีเมลของคุณ"
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
+          />
+        </div>
+
+       
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
+          <button
+            onClick={handleSubmit}
+            style={{
+              backgroundColor: '#28a745',
+              color: 'white',
+              padding: '8px 16px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}
+          >
+            Submit
+          </button>
+          <button
+            onClick={handleClear}
+            style={{
+              backgroundColor: '#dc3545',
+              color: 'white',
+              padding: '8px 16px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}
+          >
+            Clear
+          </button>
+        </div>
+
+        
+        <div style={{ backgroundColor: '#f1f1f1', padding: '15px', borderRadius: '8px' }}>
+          <p><strong>ข้อมูลปัจจุบัน:</strong></p>
+          <p><strong>ชื่อ:</strong> {submittedData?.name || 'ยังไม่ได้กรอก'}</p>
+          <p><strong>อีเมล:</strong> {submittedData?.email || 'ยังไม่ได้กรอก'}</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default FormData;
-
-
-
-// import React, { useState } from 'react';
-
-// interface FormData {
-//   name: string;
-//   email: string;
-// }
-
-// const UserForm: React.FC = () => {
-//   // สร้าง state สำหรับเก็บข้อมูล form
-//   const [formData, setFormData] = useState<FormData>({
-//     name: '',
-//     email: ''
-//   });
-
-//   // ฟังก์ชันสำหรับ handle การเปลี่ยนค่า input
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({
-//       ...prev,
-//       [name]: value
-//     }));
-//   };
-
-//   // ฟังก์ชันสำหรับ submit form
-//   const handleSubmit = () => {
-//     alert(`ชื่อ: ${formData.name}\nอีเมล: ${formData.email}`);
-//   };
-
-//   // ฟังก์ชันสำหรับ clear form
-//   const handleClear = () => {
-//     setFormData({ name: '', email: '' });
-//   };
-
-//   return (
-//     <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
-//       <h2>User Form Exercise</h2>
-
-//       {/* Input fields */}
-//       <div>
-//         <label>ชื่อ:</label>
-//         <input
-//           type="text"
-//           name="name"
-//           value={formData.name}
-//           onChange={handleChange}
-//           placeholder="กรอกชื่อของคุณ"
-//           style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
-//         />
-//       </div>
-
-//       <div>
-//         <label>อีเมล:</label>
-//         <input
-//           type="text"
-//           name="email"
-//           value={formData.email}
-//           onChange={handleChange}
-//           placeholder="กรอกอีเมลของคุณ"
-//           style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
-//         />
-//       </div>
-
-//       {/* ปุ่ม Submit และ Clear */}
-//       <div>
-//         <button
-//           onClick={handleSubmit}
-//           style={{ backgroundColor: 'green', color: 'white', padding: '8px 16px', marginRight: '10px' }}
-//         >
-//           Submit
-//         </button>
-//         <button
-//           onClick={handleClear}
-//           style={{ backgroundColor: 'red', color: 'white', padding: '8px 16px' }}
-//         >
-//           Clear
-//         </button>
-//       </div>
-
-//       {/* แสดงผล real-time */}
-//       <div style={{ marginTop: '20px', padding: '10px', background: '#000000ff', borderRadius: '5px' }}>
-//         <h4>ข้อมูลที่กรอก:</h4>
-//         <p>ชื่อ: {formData.name || 'ยังไม่ได้กรอก'}</p>
-//         <p>อีเมล: {formData.email || 'ยังไม่ได้กรอก'}</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default UserForm;
+export default UserForm;
