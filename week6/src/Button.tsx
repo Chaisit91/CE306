@@ -1,59 +1,59 @@
-import React from 'react';
+import React from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "danger" | "outline";
+  size?: "sm" | "md" | "lg";
   children: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  variant = 'primary',
-  size = 'md',
-  className = '',
+  variant = "primary",
+  size = "md",
+  className,
   disabled,
   ...props
 }) => {
-  const baseStyles: string = `
+  const baseStyle: string = `
     font-semibold rounded-lg focus:outline-none
     focus:ring-2 focus:ring-offset-2 focus:ring-opacity-75
     transition-all duration-150 ease-in-out
     border
-    disabled:opacity-60 disabled:cursor-not-allowed
+    disabled:opacity-50 disabled:cursor-not-allowed
   `;
 
-  let variantStyles: string = '';
+  let variantStyles: string = "";
   switch (variant) {
-    case 'primary':
+    case "primary":
       variantStyles = `
         bg-blue-600 text-white border-blue-600
         hover:bg-blue-700 hover:border-blue-700
         focus:ring-blue-500
-        disabled:hover:bg-blue-600
+        disabled:bg-blue-600 disabled:border-blue-600
       `;
       break;
-    case 'secondary':
+    case "secondary":
       variantStyles = `
         bg-gray-600 text-white border-gray-600
         hover:bg-gray-700 hover:border-gray-700
         focus:ring-gray-500
-        disabled:hover:bg-gray-600
+        disabled:bg-gray-600 disabled:border-gray-600
       `;
       break;
-    case 'danger':
+    case "danger":
       variantStyles = `
         bg-red-600 text-white border-red-600
         hover:bg-red-700 hover:border-red-700
         focus:ring-red-500
-        disabled:hover:bg-red-600
+        disabled:bg-red-600 disabled:border-red-600
       `;
       break;
-    case 'outline':
+    case "outline":
       variantStyles = `
         bg-transparent text-blue-600 border-blue-600
-        hover:bg-blue-600 hover:text-white
+        hover:bg-blue-700 hover:text-white
         focus:ring-blue-500
-        disabled:hover:bg-transparent disabled:text-blue-600/60 disabled:border-blue-600/60
+        disabled:bg-transparent disabled:text-blue-600/60 disabled:border-blue-600/60
       `;
       break;
     default:
@@ -64,28 +64,29 @@ const Button: React.FC<ButtonProps> = ({
       `;
   }
 
-  let sizeStyles: string = '';
+  let sizeStyles: string = "";
   switch (size) {
-    case 'sm':
-      sizeStyles = 'px-3 py-1.5 text-sm';
+    case "sm":
+      sizeStyles = "px-3 py-1.5 text-sm";
       break;
-    case 'md':
-      sizeStyles = 'px-4 py-2 text-base';
+    case "md":
+      sizeStyles = "px-4 py-2 text-base";
       break;
-    case 'lg':
-      sizeStyles = 'px-6 py-3 text-lg';
+    case "lg":
+      sizeStyles = "px-6 py-3 text-lg";
       break;
     default:
-      sizeStyles = 'px-4 py-2 text-base';
-      break;
+      sizeStyles = "px-4 py-2 text-base";
   }
 
   const combinedClassName: string = `
-    ${baseStyles}
+    ${baseStyle}
     ${variantStyles}
     ${sizeStyles}
-    ${className}
-  `.replace(/\s+/g, ' ').trim();
+    ${className || ""}
+  `
+    .replace(/\s+/g, " ")
+    .trim();
 
   return (
     <button

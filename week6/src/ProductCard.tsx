@@ -1,37 +1,53 @@
-// // components/ProductCard.tsx
-// import React from "react";
+import React from "react";
+import Button from "./Button";
 
-// type ProductCardProps = {
-//   imageUrl: string;
-//   title: string;
-//   description: string;
-//   price: number;
-//   onAddToCart: () => void;
-// };
+interface ProductCardProps {
+  imageUrl: string;
+  title: string;
+  description: string;
+  price: number;
+  onAddToCart: () => void;
+}
 
-// const ProductCard: React.FC<ProductCardProps> = ({
-//   imageUrl,
-//   title,
-//   description,
-//   price,
-//   onAddToCart,
-// }) => {
-//   return (
-//     <div className="bg-white shadow-md rounded-lg overflow-hidden w-full">
-//       <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
-//       <div className="p-4">
-//         <h2 className="text-lg font-semibold mb-2">{title}</h2>
-//         <p className="text-sm text-gray-600 mb-2">{description}</p>
-//         <p className="text-base font-bold mb-4">${price.toFixed(2)}</p>
-//         <button
-//           onClick={onAddToCart}
-//           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full"
-//         >
-//           Add to Cart
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+const ProductCard: React.FC<ProductCardProps> = ({
+  imageUrl,
+  title,
+  description,
+  price,
+  onAddToCart,
+}) => {
+  return (
+    <div
+      className="
+        w-full
+        bg-white rounded-2xl shadow-md 
+        overflow-hidden flex flex-col
+      "
+    >
+      
+      <div className="relative w-full pb-[56.25%]">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+      </div>
 
-// export default ProductCard;
+      <div className="p-4 flex flex-col flex-grow">
+        <h2 className="text-lg font-bold text-gray-800">{title}</h2>
+        <p className="text-sm text-gray-600 flex-grow mt-1">{description}</p>
+        <p className="text-base font-semibold text-gray-900 mt-2">
+          {price.toLocaleString()} ฿
+        </p>
+
+        <div className="mt-4">
+          <Button onClick={onAddToCart} variant="primary" size="md">
+            Add to Cart
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
