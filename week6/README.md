@@ -8,9 +8,9 @@ Button.tsx = ปุ่มกดที่ปรับแต่งได้ (Prima
 ใช้ Props สำหรับส่งข้อมูลเข้าไปใน ProductCard
 imageUrl: string = URL ของรูปภาพสินค้า
 title: string = ชื่อสินค้า
-description: string → รายละเอียดสินค้า
+description: string = รายละเอียดสินค้า
 price: number = ราคาสินค้า
-onAddToCart: () => void → ฟังก์ชันที่จะถูกเรียกเมื่อกดปุ่ม Add to Cart
+onAddToCart: () => void = ฟังก์ชันที่จะถูกเรียกเมื่อกดปุ่ม Add to Cart
 
 ใช้ Tailwind CSS เพื่อจัดสไตล์ให้สวยงาม ทันสมัย และ Responsive
 ออกแบบให้ Card มีเงา (shadow) และ ขอบโค้งมน (rounded corners)
