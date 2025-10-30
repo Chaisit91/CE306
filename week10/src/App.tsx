@@ -5,6 +5,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import FetchAPI from './pages/FetchAPI';
+import AxiosAPI from './pages/Axios';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Link to="/" className="mr-4">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/products" className="ml-4">Products</Link>
+        <Link to="/fetch-api" className="ml-4">Fetch API</Link>
+        <Link to="/axios-api" className="ml-4">Axios API</Link>
       </nav>
 
       <main className="p-8">
@@ -22,6 +26,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/products" element={<ProductListPage/>} />
           <Route path="/products/:productId" element={<ProductDetailPage/>} />
+          <Route path="/fetch-api" element={<FetchAPI />} />
+          <Route path="/axios-api" element={<AxiosAPI />} />
         </Routes>
       </main>
     </div>
